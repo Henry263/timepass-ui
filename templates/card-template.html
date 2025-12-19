@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "ConnectiKo",
+          "url": "https://qrmypro.com",
+          "logo": "https://qrmypro.com/image/connectiko-logo-transparent.png",
+          "description": "ConnectiKo is a free, all-in-one digital profile and QR code platform that lets you create, manage, and share your personal or business profile with one click — through a digital card or QR code link.",
+          "founder": {
+            "@type": "Person",
+            "name": "Harshil Patel",
+            "jobTitle": "Technical Architect & Engineering Manager",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "ConnectiKo"
+            }
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "support@qrmypro.com"
+          },
+          "potentialAction": {
+            "@type": "CreateAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://qrmypro.com/signup"
+            },
+            "result": {
+              "@type": "DigitalDocument",
+              "name": "ConnectiKo Digital Profile"
+            }
+          }
+        }
+        </script>
+  <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [{
+                "@type": "Question",
+                "name": "How do I create a QR code?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You can create a QR code using our free generator at qrmypro.com."
+                }
+              }, {
+                "@type": "Question",
+                "name": "Is it free to use ConnectiKo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, basic QR code generation is completely free."
+                }
+              }]
+            }
+            </script>
+  <script type="application/ld+json">
+                {
+                  "@context": "https://schema.org",
+                  "@type": "WebApplication",
+                  "name": "ConnectiKo",
+                  "url": "https://www.qrmypro.com",
+                  "applicationCategory": "UtilityApplication",
+                  "operatingSystem": "Web",
+                  "description": "ConnectiKo is a free digital profile creator that lets you connect and share all your online links, social media, and contact info using a single QR code or digital card.",
+                  "image": "https://www.qrmypro.com/assets/og-image.jpg",
+                  "author": {
+                    "@type": "Organization",
+                    "name": "ConnectiKo"
+                  },
+                  "publisher": {
+                    "@type": "Organization",
+                    "name": "ConnectiKo",
+                    "url": "https://www.qrmypro.com",
+                    "logo": {
+                      "@type": "ImageObject",
+                      "url": "https://www.qrmypro.com/assets/logo.png"
+                    }
+                  },
+                  "featureList": [
+                    "Create digital profiles with all your social and web links",
+                    "Generate shareable QR codes for personal or business use",
+                    "Free to use — no premium plan required",
+                    "Instant sharing via link or QR card",
+                    "Manage your professional digital identity under one platform"
+                  ],
+                  "inLanguage": "en",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD",
+                    "category": "FreeSoftware",
+                    "availability": "https://schema.org/InStock"
+                  },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "4.9",
+                    "ratingCount": "120"
+                  }
+                }
+                </script>
+
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="/favicon/site.webmanifest" />
+
+  <!-- Dynamically add canonical tag -->
+  <script>
+    // Create canonical link element
+    const canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    canonical.href = 'https://www.qrmypro.com' + window.location.pathname;
+
+    // Add to head
+    document.head.appendChild(canonical);
+  </script>
+  <script src="/js/jquery-3.2.1.min.js"></script>
+  <link rel="stylesheet" href="/css/card-template/card-template.css">
+  <link rel="stylesheet" href="/css/card-template/form-popup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <title>{{name}} - Digital Business Card</title>
+
+</head>
+
+<body>
+  <div class="body-class">
+    <div class="card-container">
+
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <div class="profile-header"></div>
+        
+        <div class="profile-content">
+          <div class="card-main-header">
+            <div class="profile-avatar-wrapper">
+              <div class="profile-avatar" id="cardAvatar">
+
+              </div>
+            </div>
+            
+            <div class="card-profile-info-header">
+              
+              <div class="views-counter">
+                📊 {{views}} views
+              </div>
+            </div>
+          </div>
+          <div class="card-profile-information">
+            <h1 class="profile-name">{{name}}</h1>
+            <div class="profile-title">{{title}}</div>
+            <div class="profile-organization">{{organization}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="contact-section" id="contactSection">
+        <!-- Contact items will be populated by JavaScript -->
+      </div>
+      <!-- Social Media Links -->
+      <div class="social-section" id="socialSection" style="display: none;">
+        <h3 class="section-title section-title-card">Connect With Me</h3>
+        <div class="social-links" id="socialLinks">
+          <!-- Social links will be populated by JavaScript -->
+        </div>
+      </div>
+
+      
+
+      <!-- Address -->
+      <div class="address-section" id="addressSection" style="display: none;">
+        <h3 class="section-title">📍 Location</h3>
+        <div class="address-text">{{address}}</div>
+      </div>
+
+      <!-- Notes -->
+      <div class="notes-section" id="notesSection" style="display: none;">
+        <h3 class="notes-section-title">📝 About</h3>
+        <div class="notes-text">{{notes}}</div>
+      </div>
+
+      <!-- <div id="resolution-message"
+        style="display:none;position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: linear-gradient(135deg, rgb(102, 126, 234) 0%, rgb(118, 75, 162) 100%); display: flex; align-items: center; justify-content: center; z-index: 9999; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, sans-serif;">
+        <div
+          style="background: white; padding: 2rem; border-radius: 20px; text-align: center; max-width: 90%; box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 40px;">
+          <div style="font-size: 3rem; margin-bottom: 1rem;">📱</div>
+          <h2 style="color: #333; margin-bottom: 1rem; font-size: 1.5rem;">Screen Too Small</h2>
+          <p style="color: #666; margin-bottom: 1.5rem; line-height: 1.5;">
+            This application requires a minimum screen width of 400px for the best experience.
+            Please rotate your device or use a larger screen.
+          </p>
+          <p style="color: #999; font-size: 0.9rem;">
+            Current width: 341px | Required: 400px minimum
+          </p>
+        </div>
+      </div> -->
+      <div class="empty-div-space"></div>
+      
+      <div class="card-navbar-parent">
+        <div class="card-navbar">
+          <div id="add-contact" class="card-navbar-left">
+            <a href="/api/card/{{cardId}}/vcard" class="action-btn">
+              <i class="fas fa-save"></i> <span>Save Contact</span>
+            </a>
+          </div>
+          <div id="ap-icon-div" class="card-navbar-center">
+            <div class="app-logo">
+              <img id="profile-page-logo" src="/image/apple-touch-icon.png" alt="ConnectiKo Logo" class="logo-image">
+            </div>
+          </div>
+          <div id="add-qrwallet" class="card-navbar-right">
+            <button class="action-btn addToWalletBtn" id="addToWalletBtn_">
+              <i class="fas fa-wallet"></i> Add to QRWallet
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="contact-data" type="application/json">
+        {{contactDataJSON}}
+    </script>
+
+    <script src="/js/card-template/card-template.js"></script>
+    <script src="/js/card-template/formPopup.js"></script>
+  </div>
+</body>
+
+</html>
