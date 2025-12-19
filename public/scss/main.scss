@@ -1,0 +1,37 @@
+// ===========================================
+// CONNECTIKO - MAIN STYLESHEET  
+// Digital QRCode and Analytics Platform
+// ===========================================
+
+
+// Modern @use syntax
+@use 'base';
+@use 'variables' as *;
+@use 'mixins' as *;
+
+@use 'components/style';
+@use 'components/auth';
+@use 'components/card-branding';
+@use 'components/card-carousel';
+@use 'components/country-autocomplete';
+@use 'components/faq';
+@use 'components/form-analytics';
+
+@use 'components/form-builder-questions';
+@use 'components/form-builder';
+@use 'components/form-style';
+@use 'components/homepage-modern';
+@use 'components/homepage';
+@use 'components/message-box';
+
+@use 'components/profile-photo-section';
+@use 'components/qr-analytics-modal';
+@use 'components/qr-analytics';
+@use 'components/qr-designer';
+@use 'components/team-management';
+
+@use 'components/usecases';
+@use 'components/vertical-sidebar-white';
+@use 'components/wallet';
+@use 'components/connectiko-api';
+@use 'components/pricing';

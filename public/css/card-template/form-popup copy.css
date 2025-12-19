@@ -1,0 +1,429 @@
+/* Form Popup Styles for Public Cards */
+/* Add this to server/public/css/form-popup.css */
+
+.form-popup-overlay {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.form-popup-container {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.form-popup-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #2d3748;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-popup-close:hover {
+    background: white;
+    transform: rotate(90deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.form-popup-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    border-radius: 16px 16px 0 0;
+    text-align: center;
+}
+
+.form-popup-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.form-popup-header p {
+    font-size: 15px;
+    margin: 0;
+    opacity: 0.95;
+    line-height: 1.5;
+}
+
+.form-popup-body {
+    padding: 30px;
+}
+
+.form-description {
+    font-size: 14px;
+    color: #718096;
+    margin: 0 0 25px 0;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Form Styles */
+.visitor-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-field-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field-group label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #2d3748;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.required-mark {
+    color: #e53e3e;
+    font-size: 16px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Star Rating */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    font-size: 32px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+    color: #cbd5e0;
+    transition: color 0.2s ease;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #fbbf24;
+}
+
+/* CTA Buttons */
+.form-cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.form-cta-btn {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Calendly Button */
+.calendly-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: #667eea;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.calendly-btn:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.calendly-btn i {
+    font-size: 18px;
+}
+
+/* Submit Button */
+.form-submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.form-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.form-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Success Message */
+.form-success-message {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.form-success-message i {
+    font-size: 64px;
+    color: #48bb78;
+    margin-bottom: 20px;
+    animation: successPop 0.6s ease;
+}
+
+@keyframes successPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.form-success-message p {
+    font-size: 18px;
+    color: #2d3748;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-popup-container {
+        width: 95%;
+        max-height: 95vh;
+        border-radius: 12px;
+    }
+
+    .form-popup-header {
+        padding: 25px 20px;
+    }
+
+    .form-popup-header h2 {
+        font-size: 22px;
+    }
+
+    .form-popup-header p {
+        font-size: 14px;
+    }
+
+    .form-popup-body {
+        padding: 20px;
+    }
+
+    .form-popup-close {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    .star-rating {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-popup-container {
+        width: 100%;
+        height: 100%;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .form-popup-header {
+        border-radius: 0;
+    }
+
+    .star-rating {
+        font-size: 24px;
+    }
+}
+
+/* Loading State */
+.form-submit-btn.loading {
+    opacity: 0.7;
+    cursor: not-allowed;
+    position: relative;
+}
+
+.form-submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+@keyframes spin {
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Error Message */
+.form-error-message {
+    background: #fed7d7;
+    color: #c53030;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-error-message i {
+    font-size: 18px;
+}
+
+/* Field Error State */
+.form-input.error,
+.form-textarea.error {
+    border-color: #fc8181;
+    background: #fff5f5;
+}
+
+.field-error-text {
+    color: #c53030;
+    font-size: 12px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.field-error-text i {
+    font-size: 14px;
+}
+
+/* Smooth Scrollbar */
+.form-popup-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.form-popup-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 0 8px 8px 0;
+}
+
+.form-popup-container::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 4px;
+}
+
+.form-popup-container::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}

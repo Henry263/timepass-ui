@@ -1,0 +1,637 @@
+/* Form Analytics Styles */
+/* server/public/css/form-analytics.css */
+
+/* ============================================
+   FORM ANALYTICS MAIN CONTAINER
+   ============================================ */
+#formAnalyticsSubmissionsTable{
+       .view-submission-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    background: #667eea;
+    color: white;
+    gap: 0.5rem;
+   }
+}
+
+// #formAnalyticsPage, #formAnalyticsModal{
+.form-analytics-page {
+    background: var(--gradient-primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+    min-height: 100vh;
+    padding: 2rem;
+    color: white;
+}
+
+.form-analytics-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form-analytics-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.form-analytics-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.form-analytics-header p {
+    font-size: 1.1rem;
+    opacity: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   ANALYTICS STATS CARDS
+   ============================================ */
+
+.form-analytics-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.analytics-stat-card {
+    background: white;
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+        gap: 20px;
+}
+
+/* .analytics-stat-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+} */
+
+.stat-icon-form {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* background: rgba(255, 255, 255, 0.2); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: white;
+    flex-shrink: 0;
+    border: 1px solid #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.form-stat-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #667eea;
+}
+
+.form-stat-label {
+    font-size: 1rem;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+        color: #667eea;
+}
+
+/* ============================================
+   FORM ANALYTICS CONTENT SECTIONS
+   ============================================ */
+
+.form-analytics-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.analytics-section {
+    /* background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2); */
+    overflow: hidden;
+        color: #667eea;
+}
+
+.analytics-section-header {
+        padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border-radius: 8px;
+}
+
+.analytics-section-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.analytics-section-title i {
+    color: #667eea;
+}
+
+.analytics-section-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.analytics-action-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.analytics-action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+}
+
+.analytics-section-content {
+    /* padding: 1.5rem; */
+        /* background: white; */
+    margin: 1rem 0rem;
+    // padding: 0.5rem;
+    border-radius: 8px;
+}
+
+/* ============================================
+   SUBMISSIONS TABLE
+   ============================================ */
+
+.form-analytics-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+}
+div#formAnalyticsSubmissionsTable {
+    background: white;
+    border-radius: 8px;
+}
+
+.form-analytics-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-analytics-filter label {
+    font-weight: 500;
+    color: #667eea;
+}
+
+.form-analytics-select {
+    padding: 0.5rem;
+    background: #667eea;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 0.875rem;
+}
+
+.form-analytics-select option {
+    background: #2a2a2a;
+    color: white;
+}
+
+.form-analytics-table-wrapper {
+    overflow-x: auto;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.form-analytics-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+.form-analytics-table th,
+.form-analytics-table td {
+    padding: 0.5rem;
+    text-align: left;
+    border-bottom: 1px solid rgb(42 42 42 / 10%);
+}
+
+
+.form-analytics-table th {
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+.form-analytics-table td {
+    color: #6d6d6d;
+}
+.form-analytics-table thead {
+    background: #8f8f8f;
+}
+
+.submission-row {
+    transition: background-color 0.2s ease;
+        vertical-align: top;
+}
+
+.submission-row:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   SUBMISSION ROW CONTENT
+   ============================================ */
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.contact-details {
+    font-size: 0.8rem;
+    font-weight: 600;
+    /* opacity: 0.8; */
+}
+
+.custom-responses {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.custom-item {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+}
+
+.custom-question {
+    font-weight: 500;
+    /* opacity: 0.8; */
+    color: #6d6d6d;
+}
+
+.custom-answer {
+    color: #1b73e8;
+}
+
+.custom-more {
+    font-size: 0.75rem;
+    /* opacity: 0.6; */
+    font-style: italic;
+}
+
+.no-custom {
+    /* opacity: 0.6; */
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+.source-badge,
+.status-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.source-badge.on_load { background: rgba(52, 211, 153, 0.2); color: #074730; font-weight: 600; }
+.source-badge.on_click { background: rgba(59, 130, 246, 0.2); color: #105dd9; font-weight: 600;  }
+.source-badge.on_scroll { background: rgba(168, 85, 247, 0.2); color: #a855f7; font-weight: 600; }
+.source-badge.on_exit { background: rgba(239, 68, 68, 0.2); color: #ef4444;font-weight: 600;  }
+.source-badge.manual { background: rgba(156, 163, 175, 0.2); color: #9ca3af; font-weight: 600; }
+
+.status-badge.new { background: rgba(34, 197, 94, 0.2); color: #074730; font-weight: 600; }
+.status-badge.read { background: rgba(59, 130, 246, 0.2); color: #105dd9; font-weight: 600; }
+.status-badge.replied { background: rgba(168, 85, 247, 0.2); color: #a855f7; font-weight: 600; }
+.status-badge.archived { background: rgba(156, 163, 175, 0.2); color: #9ca3af; font-weight: 600; }
+
+.action-btn {
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0.25rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0 0.25rem;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.action-btn:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.view-submission-btn {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
+    color: #3b82f6;
+}
+
+.view-submission-btn:hover {
+    background: rgba(59, 130, 246, 0.3);
+    color: white;
+}
+
+.status-change-btn {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+}
+
+.status-change-btn:hover {
+    background: rgba(34, 197, 94, 0.3);
+    color: white;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-submissions {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.empty-submissions i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    /* opacity: 0.6; */
+}
+
+.empty-submissions h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.empty-submissions p {
+    /* opacity: 0.7; */
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   SUBMISSION DETAILS MODAL
+   ============================================ */
+
+.form-analytics-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.form-analytics-modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+}
+
+.modal-close:hover {
+    opacity: 1;
+}
+
+.submission-details {
+    padding: 1.5rem;
+    color: white;
+}
+
+.submission-header {
+    margin-bottom: 1.5rem;
+}
+
+.submission-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.submission-date {
+    /* opacity: 0.8; */
+    font-size: 0.9rem;
+}
+
+.submission-contact-info,
+.submission-custom-questions,
+.submission-visitor-info {
+    margin-bottom: 1.5rem;
+}
+
+.submission-contact-info h4,
+.submission-custom-questions h4,
+.submission-visitor-info h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contact-grid,
+.visitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.contact-item,
+.visitor-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-responses-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+.custom-response-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-question-text {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.custom-answer-text {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.custom-answer-type {
+    font-size: 0.8rem;
+    /* opacity: 0.6; */
+    text-transform: uppercase;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 768px) {
+    .form-analytics-page {
+        padding: 1rem;
+    }
+    
+    .form-analytics-header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-analytics-stats {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .analytics-stat-card {
+        padding: 1rem;
+    }
+    
+    .form-stat-number {
+        font-size: 2rem;
+    }
+    
+    .form-analytics-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-analytics-table {
+        font-size: 0.875rem;
+    }
+    
+    .form-analytics-table th,
+    .form-analytics-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .contact-grid,
+    .visitor-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-analytics-modal-content {
+        width: 95%;
+        margin: 2% auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-analytics-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .analytics-section-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .analytics-section-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .analytics-action-btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+// }

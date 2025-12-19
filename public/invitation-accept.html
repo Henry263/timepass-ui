@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept Team Invitation - ConnectiKo</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Add CryptoJS for password hashing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .invitation-container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .invitation-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .invitation-header .icon {
+            font-size: 64px;
+            color: #667eea;
+            margin-bottom: 20px;
+            animation: bounceIn 0.6s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .invitation-header h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .invitation-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .invitation-details {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .detail-value {
+            color: #333;
+            text-align: right;
+            word-break: break-word;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .form-group input.invalid {
+            border-color: #dc3545;
+        }
+        
+        .form-group input.valid {
+            border-color: #28a745;
+        }
+        
+        .validation-message {
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .validation-message.error {
+            color: #dc3545;
+            display: block;
+        }
+        
+        .validation-message.success {
+            color: #28a745;
+            display: block;
+        }
+        
+        .password-requirements {
+            font-size: 12px;
+            color: #666;
+            margin-top: 8px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .password-requirements ul {
+            margin: 5px 0 0 0;
+            padding-left: 20px;
+        }
+        
+        .password-requirements li {
+            margin: 3px 0;
+        }
+        
+        .password-requirements li.met {
+            color: #28a745;
+        }
+        
+        .password-requirements li.unmet {
+            color: #dc3545;
+        }
+        
+        .password-requirements li i {
+            margin-right: 5px;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .error-message {
+            background: #fee;
+            color: #c00;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c00;
+        }
+        
+        .success-message {
+            background: #efe;
+            color: #0a0;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0a0;
+        }
+        
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .loading-spinner i {
+            font-size: 48px;
+            color: #667eea;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+        
+        .expired-message {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .expired-message .icon {
+            font-size: 64px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .login-prompt {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        
+        .login-prompt a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        @media (max-width: 768px) {
+            .invitation-container {
+                padding: 30px 20px;
+            }
+            
+            .invitation-header h1 {
+                font-size: 24px;
+            }
+            
+            .detail-row {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .detail-value {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="invitation-container">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-spinner">
+            <i class="fas fa-circle-notch"></i>
+            <p>Loading invitation...</p>
+        </div>
+        
+        <!-- Error State -->
+        <div id="errorState" style="display: none;">
+            <div class="expired-message">
+                <div class="icon"><i class="fas fa-exclamation-circle"></i></div>
+                <h2>Invitation Not Found</h2>
+                <p id="errorMessage">This invitation link is invalid or has expired.</p>
+                <a href="/" class="btn btn-primary" style="margin-top: 20px; display: inline-block; text-decoration: none;">Go to Homepage</a>
+            </div>
+        </div>
+        
+        <!-- Invitation Form -->
+        <div id="invitationForm" style="display: none;">
+            <div class="invitation-header">
+                <div class="icon"><i class="fas fa-envelope-open"></i></div>
+                <h1>You're Invited!</h1>
+                <p>Join your team on ConnectiKo</p>
+            </div>
+            
+            <div class="invitation-details">
+                <div class="detail-row">
+                    <span class="detail-label">Team:</span>
+                    <span class="detail-value" id="teamName"></span>
+                </div>
+                <div class="detail-row" id="companyRow" style="display: none;">
+                    <span class="detail-label">Company:</span>
+                    <span class="detail-value" id="companyName"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value" id="invitedEmail"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Role:</span>
+                    <span class="detail-value" id="role"></span>
+                </div>
+                <div class="detail-row" id="departmentRow" style="display: none;">
+                    <span class="detail-label">Department:</span>
+                    <span class="detail-value" id="department"></span>
+                </div>
+            </div>
+            
+            <!-- Existing User Login Prompt -->
+            <div id="existingUserPrompt" style="display: none;" class="login-prompt">
+                <p><i class="fas fa-info-circle"></i> <strong>Already have an account?</strong></p>
+                <p>Please <a href="/login">login</a> first, then return to this invitation link to join the team.</p>
+            </div>
+            
+            <!-- New User Form -->
+            <div id="newUserForm">
+                <div id="messageContainer"></div>
+                
+                <form id="acceptInvitationForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                        <div class="validation-message" id="nameError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number (e.g., +1234567890)">
+                        <div class="validation-message" id="phoneError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Create Password *</label>
+                        <input type="password" id="password" name="password" required placeholder="Create a strong password">
+                        <div class="validation-message" id="passwordError"></div>
+                        <div class="password-requirements" id="passwordRequirements">
+                            <strong>Password must contain:</strong>
+                            <ul>
+                                <li id="req-length" class="unmet">
+                                    <i class="fas fa-times"></i> At least 8 characters
+                                </li>
+                                <li id="req-uppercase" class="unmet">
+                                    <i class="fas fa-times"></i> One uppercase letter
+                                </li>
+                                <li id="req-lowercase" class="unmet">
+                                    <i class="fas fa-times"></i> One lowercase letter
+                                </li>
+                                <li id="req-number" class="unmet">
+                                    <i class="fas fa-times"></i> One number
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Re-enter your password">
+                        <div class="validation-message" id="confirmPasswordError"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                            <span>I accept the <a href="/terms" target="_blank">Terms & Conditions</a> and <a href="/privacy" target="_blank">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <i class="fas fa-check"></i> Accept Invitation & Create Account
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Success State -->
+        <div id="successState" style="display: none;">
+            <div class="success-message">
+                <h3><i class="fas fa-check-circle"></i> Welcome to the team!</h3>
+                <p>Your account has been created successfully. Redirecting to dashboard...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Password hashing configuration
+        const PasswordHasher = {
+            CLIENT_SALT: 'qrmypro_client_salt_2024_secure',
+            KEY_SIZE: 256,
+            ITERATIONS: 10000,
+
+            async hashPassword(password) {
+                if (!password) {
+                    throw new Error('Password cannot be empty');
+                }
+
+                try {
+                    if (typeof CryptoJS !== 'undefined') {
+                        console.log('🔐 Using CryptoJS for password hashing');
+                        
+                        const hash = CryptoJS.PBKDF2(password, this.CLIENT_SALT, {
+                            keySize: this.KEY_SIZE / 32,
+                            iterations: this.ITERATIONS,
+                            hasher: CryptoJS.algo.SHA256
+                        });
+                        
+                        return hash.toString(CryptoJS.enc.Hex);
+                    }
+                    
+                    console.log('🔐 Using Web Crypto API for password hashing');
+                    
+                    const encoder = new TextEncoder();
+                    const passwordData = encoder.encode(password);
+                    const saltData = encoder.encode(this.CLIENT_SALT);
+                    
+                    const keyMaterial = await crypto.subtle.importKey(
+                        'raw',
+                        passwordData,
+                        { name: 'PBKDF2' },
+                        false,
+                        ['deriveBits']
+                    );
+                    
+                    const derivedBits = await crypto.subtle.deriveBits(
+                        {
+                            name: 'PBKDF2',
+                            salt: saltData,
+                            iterations: this.ITERATIONS,
+                            hash: 'SHA-256'
+                        },
+                        keyMaterial,
+                        this.KEY_SIZE
+                    );
+                    
+                    const hashArray = Array.from(new Uint8Array(derivedBits));
+                    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                    
+                    return hashHex;
+                    
+                } catch (error) {
+                    console.error('❌ Client-side hashing error:', error);
+                    throw new Error('Failed to hash password on client side');
+                }
+            }
+        };
+
+        // Validation functions
+        const Validator = {
+            validateName(name) {
+                if (!name || name.trim().length < 2) {
+                    return { valid: false, message: 'Name must be at least 2 characters long' };
+                }
+                return { valid: true, message: '' };
+            },
+
+            validatePhone(phone) {
+                if (!phone || phone.trim() === '') {
+                    return { valid: true, message: '' }; // Optional field
+                }
+                
+                // International phone number format: +1234567890 or 1234567890
+                const phoneRegex = /^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/;
+                
+                if (!phoneRegex.test(phone.trim())) {
+                    return { 
+                        valid: false, 
+                        message: 'Please enter a valid phone number (e.g., +1234567890)' 
+                    };
+                }
+                
+                return { valid: true, message: 'Valid phone number' };
+            },
+
+            validatePassword(password) {
+                const requirements = {
+                    length: password.length >= 8,
+                    uppercase: /[A-Z]/.test(password),
+                    lowercase: /[a-z]/.test(password),
+                    number: /[0-9]/.test(password)
+                };
+
+                const allMet = Object.values(requirements).every(req => req);
+
+                return {
+                    valid: allMet,
+                    requirements,
+                    message: allMet ? 'Strong password' : 'Password does not meet all requirements'
+                };
+            },
+
+            validateConfirmPassword(password, confirmPassword) {
+                if (password !== confirmPassword) {
+                    return { valid: false, message: 'Passwords do not match' };
+                }
+                return { valid: true, message: 'Passwords match' };
+            }
+        };
+
+        // Real-time validation
+        const nameInput = document.getElementById('name');
+        const phoneInput = document.getElementById('phone');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+
+        // Name validation
+        nameInput.addEventListener('blur', () => {
+            const validation = Validator.validateName(nameInput.value);
+            updateValidationUI('name', validation);
+        });
+
+        // Phone validation
+        phoneInput.addEventListener('blur', () => {
+            const validation = Validator.validatePhone(phoneInput.value);
+            updateValidationUI('phone', validation);
+        });
+
+        // Password validation with real-time requirements update
+        passwordInput.addEventListener('input', () => {
+            const validation = Validator.validatePassword(passwordInput.value);
+            updatePasswordRequirements(validation.requirements);
+        });
+
+        passwordInput.addEventListener('blur', () => {
+            const validation = Validator.validatePassword(passwordInput.value);
+            updateValidationUI('password', validation);
+        });
+
+        // Confirm password validation
+        confirmPasswordInput.addEventListener('blur', () => {
+            const validation = Validator.validateConfirmPassword(
+                passwordInput.value,
+                confirmPasswordInput.value
+            );
+            updateValidationUI('confirmPassword', validation);
+        });
+
+        // Update validation UI
+        function updateValidationUI(fieldName, validation) {
+            const input = document.getElementById(fieldName);
+            const errorDiv = document.getElementById(`${fieldName}Error`);
+
+            if (!validation.valid && input.value.trim() !== '') {
+                input.classList.add('invalid');
+                input.classList.remove('valid');
+                errorDiv.textContent = validation.message;
+                errorDiv.className = 'validation-message error';
+            } else if (validation.valid && input.value.trim() !== '') {
+                input.classList.add('valid');
+                input.classList.remove('invalid');
+                errorDiv.textContent = validation.message;
+                errorDiv.className = 'validation-message success';
+            } else {
+                input.classList.remove('valid', 'invalid');
+                errorDiv.style.display = 'none';
+            }
+        }
+
+        // Update password requirements UI
+        function updatePasswordRequirements(requirements) {
+            const updateRequirement = (id, met) => {
+                const element = document.getElementById(id);
+                const icon = element.querySelector('i');
+                
+                if (met) {
+                    element.className = 'met';
+                    icon.className = 'fas fa-check';
+                } else {
+                    element.className = 'unmet';
+                    icon.className = 'fas fa-times';
+                }
+            };
+
+            updateRequirement('req-length', requirements.length);
+            updateRequirement('req-uppercase', requirements.uppercase);
+            updateRequirement('req-lowercase', requirements.lowercase);
+            updateRequirement('req-number', requirements.number);
+        }
+
+        // Get token from URL
+        const urlPath = window.location.pathname;
+        const token = urlPath.split('/').pop();
+        
+        let invitationData = null;
+        
+        // Load invitation details
+        async function loadInvitation() {
+            try {
+                const response = await fetch(`/api/invitation/${token}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    invitationData = data.invitation;
+                    displayInvitation(data.invitation);
+                } else {
+                    showError(data.message);
+                }
+            } catch (error) {
+                console.error('Error loading invitation:', error);
+                showError('Failed to load invitation details');
+            }
+        }
+        
+        // Display invitation details
+        function displayInvitation(invitation) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('invitationForm').style.display = 'block';
+            
+            document.getElementById('teamName').textContent = invitation.teamName;
+            document.getElementById('invitedEmail').textContent = invitation.email;
+            document.getElementById('role').textContent = formatRole(invitation.role);
+            
+            if (invitation.companyName) {
+                document.getElementById('companyName').textContent = invitation.companyName;
+                document.getElementById('companyRow').style.display = 'flex';
+            }
+            
+            if (invitation.department) {
+                document.getElementById('department').textContent = invitation.department;
+                document.getElementById('departmentRow').style.display = 'flex';
+            }
+            
+            // Show login prompt if user exists
+            if (invitation.userExists) {
+                document.getElementById('existingUserPrompt').style.display = 'block';
+            }
+        }
+        
+        // Handle form submission
+        document.getElementById('acceptInvitationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validate all fields
+            const name = nameInput.value;
+            const phone = phoneInput.value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            const acceptTerms = document.getElementById('acceptTerms').checked;
+
+            // Validation checks
+            const nameValidation = Validator.validateName(name);
+            const phoneValidation = Validator.validatePhone(phone);
+            const passwordValidation = Validator.validatePassword(password);
+            const confirmPasswordValidation = Validator.validateConfirmPassword(password, confirmPassword);
+
+            // Update UI for all fields
+            updateValidationUI('name', nameValidation);
+            updateValidationUI('phone', phoneValidation);
+            updateValidationUI('password', passwordValidation);
+            updateValidationUI('confirmPassword', confirmPasswordValidation);
+
+            // Check if all validations pass
+            if (!nameValidation.valid) {
+                showMessage('Please enter a valid name', 'error');
+                nameInput.focus();
+                return;
+            }
+
+            if (!phoneValidation.valid) {
+                showMessage('Please enter a valid phone number', 'error');
+                phoneInput.focus();
+                return;
+            }
+
+            if (!passwordValidation.valid) {
+                showMessage('Password does not meet all requirements', 'error');
+                passwordInput.focus();
+                return;
+            }
+
+            if (!confirmPasswordValidation.valid) {
+                showMessage('Passwords do not match', 'error');
+                confirmPasswordInput.focus();
+                return;
+            }
+
+            if (!acceptTerms) {
+                showMessage('You must accept the terms and conditions', 'error');
+                return;
+            }
+            
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Creating Account...';
+            
+            try {
+                // Hash the password before sending
+                const hashedPassword = await PasswordHasher.hashPassword(password);
+                
+                const formData = {
+                    name: name,
+                    phone: phone,
+                    password: hashedPassword, // Send hashed password
+                    acceptTerms: acceptTerms
+                };
+                
+                const response = await fetch(`/api/invitation/${token}/accept`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    // Store token
+                    localStorage.setItem('token', data.token);
+                    
+                    // Show success
+                    document.getElementById('invitationForm').style.display = 'none';
+                    document.getElementById('successState').style.display = 'block';
+                    
+                    // Redirect to dashboard
+                    setTimeout(() => {
+                        window.location.href = '/profile';
+                    }, 2000);
+                } else {
+                    showMessage(data.message, 'error');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> Accept Invitation & Create Account';
+                }
+            } catch (error) {
+                console.error('Error accepting invitation:', error);
+                showMessage('Failed to accept invitation. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Accept Invitation & Create Account';
+            }
+        });
+        
+        // Show error state
+        function showError(message) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('errorMessage').textContent = message;
+        }
+        
+        // Show message
+        function showMessage(message, type) {
+            const container = document.getElementById('messageContainer');
+            const className = type === 'error' ? 'error-message' : 'success-message';
+            container.innerHTML = `<div class="${className}">${message}</div>`;
+            
+            // Scroll to message
+            container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
+        
+        // Format role
+        function formatRole(role) {
+            return role.split('_').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+        
+        // Load invitation on page load
+        loadInvitation();
+    </script>
+</body>
+</html>

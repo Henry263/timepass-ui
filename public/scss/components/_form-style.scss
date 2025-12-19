@@ -1,0 +1,395 @@
+/* ============================================
+   FORM STYLES - Main Form Controls
+   ============================================ */
+
+/* Disable Chrome autofill styling */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-text-fill-color: #2c3e50 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ============================================
+   READONLY FIELDS
+   ============================================ */
+
+.form-group input[readonly],
+.form-group input:read-only {
+  background-color: #f8f9fa !important;
+  cursor: not-allowed !important;
+  color: #6c757d !important;
+  border-color: #dee2e6 !important;
+  opacity: 0.85;
+}
+
+.form-group input[readonly]:focus,
+.form-group input:read-only:focus {
+  border-color: #dee2e6 !important;
+  box-shadow: none !important;
+}
+
+/* ============================================
+   TOGGLE SWITCH CHECKBOXES
+   ============================================ */
+
+.form-group .checkbox-label {
+  display: flex !important;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  font-weight: 400 !important;
+  background: white;
+  padding: 0.75rem;
+  border-radius: 0.625rem;
+}
+
+.form-group .checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.form-group .checkbox-label .toggle {
+  width: 50px;
+  height: 26px;
+  background: #ddd;
+  border-radius: 13px;
+  position: relative;
+  margin-right: 0.75rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.form-group .checkbox-label .toggle::after {
+  content: "";
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.form-group .checkbox-label input[type="checkbox"]:checked + .toggle {
+  background: var(--gradient-primary, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+}
+
+.form-group .checkbox-label input[type="checkbox"]:checked + .toggle::after {
+  left: 26px;
+}
+
+.form-group .checkbox-label:hover .toggle {
+  box-shadow: 0 0 10px rgba(118, 75, 162, 0.3);
+}
+
+.form-group .checkbox-label span:not(.toggle) {
+  color: #333;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* ============================================
+   ENHANCED AUTOCOMPLETE DROPDOWN
+   ============================================ */
+
+.autocomplete-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  background: #ffffff;
+  border: 2px solid var(--primary-color, #667eea);
+  border-top: none;
+  border-radius: 0 0 0.5rem 0.5rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  display: none;
+  margin-top: 0;
+}
+
+.autocomplete-dropdown.active {
+  display: block;
+  animation: slideDownAuto 0.2s ease-out;
+}
+
+@keyframes slideDownAuto {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   AUTOCOMPLETE ITEMS
+   ============================================ */
+
+.autocomplete-item {
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  color: #2c3e50;
+  background: white;
+}
+
+.autocomplete-item:last-child {
+  border-bottom: none;
+  border-radius: 0 0 0.375rem 0.375rem;
+}
+
+.autocomplete-item:hover,
+.autocomplete-item.selected {
+  background: #f0f4ff;
+  color: var(--primary-color, #667eea);
+}
+
+.autocomplete-item .flag {
+  margin-right: 0.75rem;
+  font-size: 1.25rem;
+  min-width: 28px;
+}
+
+.autocomplete-no-results {
+  padding: 1.25rem 1rem;
+  color: #95a5a6;
+  text-align: center;
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+/* ============================================
+   SCROLLBAR FOR DROPDOWN
+   ============================================ */
+
+.autocomplete-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-track {
+  background: #f1f3f4;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 0.25rem;
+}
+
+.autocomplete-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* ============================================
+   DISABLED DROPDOWN INPUTS
+   ============================================ */
+
+#country:disabled,
+#state:disabled,
+#city:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .autocomplete-dropdown {
+    max-height: 220px;
+  }
+
+  .autocomplete-item {
+    padding: 0.6875rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .autocomplete-item .flag {
+    font-size: 1.125rem;
+    margin-right: 0.625rem;
+    min-width: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .autocomplete-dropdown {
+    max-height: 200px;
+  }
+
+  .autocomplete-item {
+    padding: 0.625rem 0.75rem;
+  }
+
+  .form-group .checkbox-label span:not(.toggle) {
+    font-size: 0.75rem;
+  }
+}
+/**
+*==== Style for the signup page =======
+*/
+.signup-div-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+form#signupForm
+ {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+.create-btn-divs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.signup-page-header {
+  display: flex
+;
+  flex-direction: row;
+  justify-content: center;
+}
+.account-type-selection {
+  margin: 2rem 0;
+}
+
+.account-type-selection h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 500;
+  color: white;
+}
+
+.account-type-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.account-type-card {
+  position: relative;
+  padding: 2rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: white;
+}
+
+.account-type-card:hover {
+  border-color: #007bff;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.account-type-card.featured {
+  border-color: #007bff;
+  box-shadow: 0 5px 20px rgba(0,123,255,0.1);
+}
+
+.account-type-card.selected {
+  border-color: #667de8;
+  background: #f8fff9;
+}
+
+.account-type-card .badge {
+  position: absolute;
+  top: -10px;
+  right: 20px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border-color: white;
+  border: 1px solid;
+
+}
+
+.account-type-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-type-icon i {
+  font-size: 36px;
+  color: white;
+}
+
+.account-type-card h4 {
+  font-size: 24px;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.account-type-card p {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.account-features {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin: 1.5rem 0;
+}
+
+.account-features li {
+  padding: 0.5rem 0;
+  color: #555;
+  display: flex;
+  align-items: center;
+}
+
+.account-features li i {
+  color: #28a745;
+  margin-right: 0.5rem;
+}
+
+.select-account-type {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#corporateFields {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #e0e0e0;
+}
+
+#corporateFields h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

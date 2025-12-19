@@ -1,0 +1,687 @@
+/* QR Analytics Modal Styles */
+/* server/public/css/qr-analytics-modal.css */
+
+/* ============================================
+   QR ANALYTICS MODAL BASE
+   ============================================ */
+
+.qr-analytics-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+.qr-analytics-modal-content {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 1rem;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    overflow-y: auto;
+    color: white;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.4s ease forwards;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    margin: 0 auto;
+    position: relative;
+    top: 5%;
+
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50px) scale(0.95);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    .qr-analytics-modal-content::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .qr-analytics-modal-content::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+    }
+
+    .qr-analytics-modal-content::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 3px;
+    }
+
+    .qr-analytics-modal-content::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.5);
+    }
+
+    /* ============================================
+   LOADING STATE
+   ============================================ */
+
+    .qr-analytics-modal-content.loading {
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .modal-loading {
+        padding: 3rem 2rem;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 2rem;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    .modal-loading h3 {
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .modal-loading p {
+        opacity: 0.8;
+        font-size: 1rem;
+    }
+
+    /* ============================================
+   MODAL HEADER
+   ============================================ */
+
+    .qr-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 2rem 2rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .qr-modal-title {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .qr-modal-title i {
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 0.25rem;
+    }
+
+    .qr-modal-title h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        margin: 0 0 0.25rem 0;
+        line-height: 1.2;
+    }
+
+    .qr-modal-subtitle {
+        font-size: 1rem;
+        opacity: 0.7;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    .qr-modal-close {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.25rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .qr-modal-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.05);
+    }
+
+    /* ============================================
+   ANALYTICS STATS GRID
+   ============================================ */
+
+    .qr-analytics-stats {
+        padding: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* .stat-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    color: white;
+} */
+
+    /* .stat-card.primary {
+    border-color: rgba(52, 211, 153, 0.5);
+    background: linear-gradient(135deg, rgba(52, 211, 153, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+} */
+
+    /* .stat-card.secondary {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.stat-card.accent {
+    border-color: rgba(168, 85, 247, 0.5);
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+.stat-card.highlight {
+    border-color: rgba(245, 158, 11, 0.5);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
+} */
+
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        flex-shrink: 0;
+    }
+
+    .stat-icon-qrana {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        /* background: rgba(255, 255, 255, 0.2); */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: white;
+        flex-shrink: 0;
+        border: 1px solid #667eea;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .stat-content {
+        flex: 1;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+            font-size: 1rem;
+        opacity: 1;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .date {
+        color: white;
+        font-size: 0.875rem;
+    }
+
+    .stat-meta {
+        font-size: 0.75rem;
+        opacity: 0.6;
+        margin-top: 0.25rem;
+    }
+
+    /* ============================================
+   SCAN CHART VISUALIZATION
+   ============================================ */
+
+    .qr-scan-chart {
+        padding: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .qr-scan-chart h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .qr-scan-chart h3 i {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .chart-container {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .chart-bars {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        height: 200px;
+        gap: 0.5rem;
+    }
+
+    .chart-bar-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .chart-bar-wrapper:hover {
+        transform: translateY(-2px);
+    }
+
+    .chart-bar {
+        background: linear-gradient(to top, rgba(52, 211, 153, 0.8) 0%, rgba(52, 211, 153, 0.4) 100%);
+        width: 100%;
+        min-height: 4px;
+        border-radius: 2px 2px 0 0;
+        position: relative;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 0.25rem;
+    }
+
+    .chart-bar:hover {
+        background: linear-gradient(to top, rgba(52, 211, 153, 1) 0%, rgba(52, 211, 153, 0.6) 100%);
+    }
+
+    .bar-value {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: white;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    .chart-bar-wrapper:hover .bar-value {
+        opacity: 1;
+    }
+
+    .chart-label {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        opacity: 0.7;
+        font-weight: 500;
+    }
+
+    .no-chart-data {
+        text-align: center;
+        padding: 3rem 2rem;
+        opacity: 0.7;
+    }
+
+    .no-chart-data i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    .no-chart-data p {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    /* ============================================
+   SCAN HISTORY TABLE
+   ============================================ */
+
+    .qr-scan-history {
+        padding: 2rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .qr-scan-history h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .qr-scan-history h3 i {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .history-table-wrapper {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .history-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .history-table th {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 1rem 0.75rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .history-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        font-size: 0.875rem;
+    }
+
+    .history-row {
+        transition: background-color 0.2s ease;
+    }
+
+    .history-row:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .history-row:last-child td {
+        border-bottom: none;
+    }
+
+    .scan-time .date {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.25rem;
+    }
+
+    .scan-time .time {
+        opacity: 0.7;
+        font-size: 0.8rem;
+    }
+
+    .scan-location i,
+    .scan-device i {
+        margin-right: 0.5rem;
+        opacity: 0.7;
+        width: 16px;
+        text-align: center;
+    }
+
+    .scan-ip code {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-family: 'Courier New', monospace;
+        font-size: 0.8rem;
+    }
+
+    .no-history-data {
+        text-align: center;
+        padding: 3rem 2rem;
+        opacity: 0.7;
+    }
+
+    .no-history-data i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+    }
+
+    .no-history-data p {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    /* ============================================
+   MODAL ACTIONS
+   ============================================ */
+
+    .qr-modal-actions {
+        padding: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .qr-action-btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .qr-action-btn.primary {
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .qr-action-btn.primary:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-1px);
+    }
+
+    .qr-action-btn.secondary {
+        background: rgba(52, 211, 153, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(52, 211, 153, 0.4);
+    }
+
+    .qr-action-btn.secondary:hover {
+        background: rgba(52, 211, 153, 0.3);
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    /* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+    @media (max-width: 768px) {
+        .qr-analytics-modal-content {
+            width: 95%;
+            max-height: 95vh;
+            border-radius: 0.75rem;
+        }
+
+        .qr-modal-header {
+            padding: 1.5rem;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .qr-modal-title {
+            gap: 0.75rem;
+        }
+
+        .qr-modal-title h2 {
+            font-size: 1.5rem;
+        }
+
+        .qr-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 40px;
+            height: 40px;
+        }
+
+        .qr-analytics-stats,
+        .qr-scan-chart,
+        .qr-scan-history,
+        .qr-modal-actions {
+            padding: 1.5rem;
+        }
+
+        .stats-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .stat-card {
+            padding: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 1.25rem;
+        }
+
+        .stat-number {
+            font-size: 1.2rem;
+        }
+
+        .chart-bars {
+            height: 150px;
+            gap: 0.25rem;
+        }
+
+        .history-table-wrapper {
+            overflow-x: auto;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            white-space: nowrap;
+        }
+
+        .qr-modal-actions {
+            flex-direction: column;
+        }
+
+        .qr-action-btn {
+            justify-content: center;
+            padding: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .qr-analytics-modal-content {
+            width: 98%;
+            border-radius: 0.5rem;
+        }
+
+        .qr-modal-title h2 {
+            font-size: 1.25rem;
+        }
+
+        .stat-number {
+            font-size: 1.25rem;
+        }
+
+        .chart-bars {
+            height: 120px;
+        }
+    }
+
+    /* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .qr-analytics-modal,
+        .qr-analytics-modal-content,
+        .loading-spinner,
+        .chart-bar-wrapper,
+        .history-row {
+            animation: none;
+            transition: none;
+        }
+    }
+
+    .qr-action-btn:focus,
+    .qr-modal-close:focus {
+        outline: 2px solid rgba(255, 255, 255, 0.8);
+        outline-offset: 2px;
+    }
+
+    /* High contrast mode */
+    @media (prefers-contrast: high) {
+        .qr-analytics-modal-content {
+            border: 2px solid white;
+        }
+
+        .stat-card,
+        .chart-container,
+        .history-table-wrapper {
+            border: 1px solid white;
+        }
+    }
+}
